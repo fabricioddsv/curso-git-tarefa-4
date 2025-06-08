@@ -15,7 +15,7 @@ jobs:
 
       - name: Check if index.html exists
         run: |
-          if [ ! -f public/index.html ]; then
+          if [ ! -f index.html ]; then
             echo "ERRO: arquivo public/index.html não encontrado!"
             exit 1
           fi
