@@ -1,28 +1,26 @@
-name: Deploy GitHub Pages
+name: Deploy para GitHub Pages
 
 on:
   push:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
-  check_and_deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-      - name: Check if index.html exists
-        run: |
-          if [ ! -f public/index.html ]; then
-            echo "ERRO: arquivo public/index.html não encontrado!"
-            exit 1
-          fi
+      - name: Instalar dependências (se necessário)
+        run: echo "Nenhuma dependência necessária para HTML/CSS/JS puro"
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Deploy com peaceiris/actions-gh-pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./public
-
